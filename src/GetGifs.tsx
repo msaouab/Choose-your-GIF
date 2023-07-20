@@ -54,25 +54,25 @@ const GetGifs = (props: { input: string }) => {
 	const gif = useSelector((state: RootState) => state.gif);
 
 	const getData = (input: string) => {
-		console.log("input", input)
-		// debounce(() => {
-			axios
-				.get(
-					`https://api.giphy.com/v1/gifs/search?api_key=${API_KEY}&q=${input}&limit=25&offset=0&rating=g&lang=e`
-				)
-				.then((response) => {
-					dispatch({ type: "gif/setGif", payload: response.data.data });
-				})
-				.catch((error: Error) => {
-					console.error("Error fetching GIFs:", error);
-				});
-		// }, 100);
+		console.log("input", input);
+		axios
+			.get(
+				`https://api.giphy.com/v1/gifs/search?api_key=${API_KEY}&q=${input}&limit=25&offset=0&rating=g&lang=e`
+			)
+			.then((response) => {
+				dispatch({ type: "gif/setGif", payload: response.data.data });
+			})
+			.catch((error: Error) => {
+				console.error("Error fetching GIFs:", error);
+			});
 	};
 
+	const debouncedGetData = debounce(getData, 500);
+
 	useEffect(() => {
-		getData(input);
-	}, [input]);
-	console.log('gif', gif)
+		debouncedGetData(input);
+		return () => debouncedGetData.cancel();
+	}, [input, debouncedGetData]);
 
 	return (
 		<GifStyle>
