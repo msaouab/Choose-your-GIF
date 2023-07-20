@@ -4,10 +4,10 @@ import axios from "axios";
 import debounce from "lodash.debounce";
 import { useEffect } from "react";
 import { setGif } from "../../store/GifSlice";
-import { GifStyle } from "./style";
 import ImgGif from "../../components/ImgGif";
-const API_KEY = "UC6QeKH1sTZwo7OgHc1oAJJu4JFV59TJ";
+import styled from "styled-components";
 
+const API_KEY = "UC6QeKH1sTZwo7OgHc1oAJJu4JFV59TJ";
 
 interface Gif {
 	images: {
@@ -18,6 +18,28 @@ interface Gif {
 	title: string;
 }
 
+const GifStyle = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-wrap: wrap;
+	gap: 2rem;
+	& > .imgContainer {
+		border: 2px solid #fff;
+		& > img {
+			width: 300px;
+			max-width: 100%;
+			box-sizing: border-box;
+		}
+	}
+	@media (max-width: 300px) {
+		& > .imgContainer {
+			width: 80%;
+		}
+	}
+`;
+
+
 const GetGifs = (props: { input: string }) => {
 	const dispatch = useDispatch();
 	const { input } = props;
@@ -25,7 +47,6 @@ const GetGifs = (props: { input: string }) => {
 	const gif = useSelector((state: RootState) => state.gif);
 
 	const getData = (input: string) => {
-		console.log("input", input);
 		axios
 			.get<{ data: Gif[] }>(
 				`https://api.giphy.com/v1/gifs/search?api_key=${API_KEY}&q=${input}&limit=25&offset=0&rating=g&lang=e`
@@ -50,7 +71,7 @@ const GetGifs = (props: { input: string }) => {
 			{gif &&
 				gif.map((item: Gif, index: number) => (
 					<div className="imgContainer" key={index}>
-						<ImgGif source={item.images.original.url} alt={item.title}/>
+						<ImgGif source={item.images.original.url} alt={item.title} />
 					</div>
 				))}
 		</GifStyle>
