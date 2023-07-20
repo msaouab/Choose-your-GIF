@@ -1,8 +1,7 @@
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "./store";
+import { RootState } from "../../store/store";
 import GetGifs from "./GetGifs";
-
 
 const FromStyle = styled.div`
 	display: flex;
@@ -25,30 +24,20 @@ const FromStyle = styled.div`
 		align-items: center;
 		flex-wrap: wrap;
 		gap: 0.2rem;
-		& > input,
-		button {
+		& > input {
 			padding: 1rem;
 			font-size: 1rem;
 			border: 1px solid #fff;
 			background: rgba(217, 217, 217, 0);
 			color: #d0d6f9;
-		}
-		& > input {
 			width: 30em;
 			outline: none;
-		}
-		& > button {
-			cursor: pointer;
-			text-transform: uppercase;
 		}
 	}
 	@media (max-width: 768px) {
 		& > form {
 			gap: 1rem;
 			& > input {
-				width: 80%;
-			}
-			& > button {
 				width: 80%;
 			}
 		}
@@ -62,9 +51,7 @@ const Form = () => {
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		e.preventDefault();
 		const value = e.target.value;
-		// debounce(() => {
-			dispatch({ type: "gif/setInput", payload: value });
-		// }, 500)();
+		dispatch({ type: "gif/setInput", payload: value });
 	};
 
 	return (
@@ -80,7 +67,7 @@ const Form = () => {
 					autoComplete="off"
 				/>
 			</form>
-			<GetGifs input={input}/>
+			<GetGifs input={input} />
 		</FromStyle>
 	);
 };

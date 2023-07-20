@@ -1,5 +1,5 @@
 import { styled } from "styled-components";
-import Form from "./Form";
+import Form from "./pages/Home/Home";
 
 const AppContainer = styled.div`
 	display: flex;
