@@ -1,22 +1,8 @@
 import styled from "styled-components";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import debounce from "lodash.debounce";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "./store";
+import GetGifs from "./GetGifs";
 
-const API_KEY = "UC6QeKH1sTZwo7OgHc1oAJJu4JFV59TJ";
-
-interface Gif {
-	images: {
-		original: {
-			url: string;
-		};
-	};
-	title: string;
-}
-
-interface GifApiInterface {
-	data: Gif[];
-}
 
 const FromStyle = styled.div`
 	display: flex;
@@ -69,64 +55,17 @@ const FromStyle = styled.div`
 	}
 `;
 
-const GifStyle = styled.div`
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-wrap: wrap;
-	gap: 2rem;
-	& > .imgContainer {
-		border: 2px solid #fff;
-		& > img {
-			width: 300px;
-			aspect-ratio: 1;
-			max-width: 100%;
-			box-sizing: border-box;
-		}
-		& > button {
-			background: transparent;
-			border: none;
-			color: #fff;
-			cursor: pointer;
-			position: absolute;
-			left: 150px;
-			top: 90%;
-		}
-	}
-	@media (max-width: 300px) {
-		& > .imgContainer {
-			width: 80%;
-		}
-	}
-`;
-
 const Form = () => {
-	const [input, setInput] = useState("");
-	const [gif, setGif] = useState<Gif[] | null>(null);
+	const dispatch = useDispatch();
+	const input = useSelector((state: RootState) => state.input);
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		e.preventDefault();
-		setInput(e.target.value);
+		const value = e.target.value;
+		// debounce(() => {
+			dispatch({ type: "gif/setInput", payload: value });
+		// }, 500)();
 	};
-
-	const getData = debounce((input: string) => {
-		console.log("input: ", input);
-		axios
-			.get<GifApiInterface>(
-				`https://api.giphy.com/v1/gifs/search?api_key=${API_KEY}&q=${input}&limit=25&offset=0&rating=g&lang=e`
-			)
-			.then((res) => {
-				setGif(res.data.data);
-			})
-			.catch((err) => {
-				console.log("Error getting GIFs: ", err);
-			});
-			console.log("test the debounce");
-	}, 100);
-	useEffect(() => {
-		// if (input)
-		getData(input);
-	}, [input, getData]);
 
 	return (
 		<FromStyle>
@@ -138,23 +77,10 @@ const Form = () => {
 					id="test"
 					onChange={handleChange}
 					placeholder="Find your GIF"
-					value={input}
 					autoComplete="off"
 				/>
 			</form>
-			<GifStyle>
-				{gif?.map((item: Gif, index: number) => (
-					<a
-						className="imgContainer"
-						key={index}
-						href={item.images.original.url}
-						download={`gif_${index}`}
-						target="_blanc"
-					>
-						<img src={item.images.original.url} alt={item.title} />
-					</a>
-				))}
-			</GifStyle>
+			<GetGifs input={input}/>
 		</FromStyle>
 	);
 };
