@@ -1,7 +1,5 @@
 import styled from "styled-components";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../store/store";
-import GetGifs from "./GetGifs";
+import { useDispatch } from "react-redux";
 
 const FromStyle = styled.div`
 	display: flex;
@@ -46,7 +44,10 @@ const FromStyle = styled.div`
 
 const Form = () => {
 	const dispatch = useDispatch();
-	const input = useSelector((state: RootState) => state.input);
+
+	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+	};
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		e.preventDefault();
@@ -57,17 +58,16 @@ const Form = () => {
 	return (
 		<FromStyle>
 			<h1>Choose your GIFs</h1>
-			<form>
+			<form onSubmit={handleSubmit}>
 				<input
-					type="text"
-					name="test"
-					id="test"
+					type="search"
+					name="search"
+					id="search"
 					onChange={handleChange}
 					placeholder="Find your GIF"
 					autoComplete="off"
 				/>
 			</form>
-			<GetGifs input={input} />
 		</FromStyle>
 	);
 };

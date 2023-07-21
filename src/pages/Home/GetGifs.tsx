@@ -23,28 +23,18 @@ const GifStyle = styled.div`
 	align-items: center;
 	justify-content: center;
 	flex-wrap: wrap;
-	gap: 2rem;
+	gap: 1rem;
 	& > .imgContainer {
-		border: 2px solid #fff;
-		& > img {
-			width: 300px;
-			max-width: 100%;
-			box-sizing: border-box;
-		}
-	}
-	@media (max-width: 300px) {
-		& > .imgContainer {
-			width: 80%;
-		}
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
 `;
 
-
-const GetGifs = (props: { input: string }) => {
+const GetGifs = () => {
 	const dispatch = useDispatch();
-	const { input } = props;
-
 	const gif = useSelector((state: RootState) => state.gif);
+	const input = useSelector((state: RootState) => state.input);
 
 	const getData = (input: string) => {
 		axios
@@ -63,7 +53,9 @@ const GetGifs = (props: { input: string }) => {
 
 	useEffect(() => {
 		debouncedGetData(input);
-		return () => debouncedGetData.cancel();
+		return () => {
+			debouncedGetData.cancel();
+		};
 	}, [input]);
 
 	return (
