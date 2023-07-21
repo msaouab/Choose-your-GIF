@@ -11,7 +11,7 @@ const FromStyle = styled.div`
 	& > h1 {
 		color: #fff;
 		border: 1px solid #fff;
-		padding: 1rem 2rem;
+		padding: 1rem 1rem;
 		text-transform: uppercase;
 		margin-top: 2rem;
 		text-align: center;
@@ -20,7 +20,6 @@ const FromStyle = styled.div`
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		flex-wrap: wrap;
 		gap: 0.2rem;
 		& > input {
 			padding: 1rem;
@@ -28,16 +27,19 @@ const FromStyle = styled.div`
 			border: 1px solid #fff;
 			background: rgba(217, 217, 217, 0);
 			color: #d0d6f9;
-			width: 30em;
+			width: 40em;
 			outline: none;
 		}
 	}
 	@media (max-width: 768px) {
+		& > h1 {
+			font-size: 1.5rem;
+			width: 100%;
+		}
+		width: 60%;
 		& > form {
+			width: 100%;
 			gap: 1rem;
-			& > input {
-				width: 80%;
-			}
 		}
 	}
 `;

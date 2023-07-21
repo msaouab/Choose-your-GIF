@@ -8,9 +8,11 @@ const ImgContainer = styled.div`
 	border-radius: 15px;
 	width: 350px;
 	& > img {
+		aspect-ratio: 1;
+		width: 350px;
+		height: 350px;
 		border-radius: 10px;
 		width: 100%;
-		aspect-ratio: 1;
 		max-width: 100%;
 		object-fit: cover;
 	}
@@ -36,8 +38,8 @@ const ImgGif = ({ source, alt }: { source: string; alt?: string }) => {
 				<Stack>
 					<Skeleton
 						variant="rectangular"
-						width={210}
-						height={118}
+						// width={210}
+						// height={118}
 						animation="wave"
 					/>
 				</Stack>

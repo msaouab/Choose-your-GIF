@@ -12,7 +12,6 @@ const AppContainer = styled.main`
 	height: 100vh;
 	&.active {
 		justify-content: flex-start;
-		transition: justify-content 2s linear;
 	}
 `;
 
