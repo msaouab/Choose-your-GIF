@@ -14,7 +14,7 @@ To run the app locally, follow these steps:
 
 ## Deployment
 
-The app is deployed on Netlify. You can access it using this link: [Take-Home-Assignment]{https://takehome-assignment.netlify.app/} on Netlify.
+The app is deployed on Netlify. You can access it using this link: [Take-Home-Assignment](https://takehome-assignment.netlify.app/) on Netlify.
 
 Please feel free to explore and enjoy the app! If you have any questions or feedback, don't hesitate to reach out to me.
 
