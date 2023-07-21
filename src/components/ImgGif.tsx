@@ -5,8 +5,10 @@ import { styled } from "styled-components";
 
 const ImgContainer = styled.div`
 	border: 5px solid #fff;
+	border-radius: 15px;
 	width: 350px;
 	& > img {
+		border-radius: 10px;
 		width: 100%;
 		aspect-ratio: 1;
 		max-width: 100%;
