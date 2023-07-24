@@ -23,9 +23,6 @@ const ImgContainer = styled.div`
 `;
 
 const ModalContent = styled.div`
-	display: flex;
-	align-items: center;
-	justify-content: center;
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -39,7 +36,7 @@ const ModalContent = styled.div`
 		object-fit: cover;
 		box-sizing: border-box;
 	}
-	@media (max-width: 400px) {
+	@media (max-width: 700px) {
 		width: 80%;
 	}
 `;
