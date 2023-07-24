@@ -29,7 +29,7 @@ const ModalContent = styled.div`
 	transform: translate(-50%, -50%);
 	width: 600px;
 	height: auto;
-	border: 5px solid #000;
+	border: 5px solid #fff;
 	& > img {
 		width: 100%;
 		max-width: 100%;
