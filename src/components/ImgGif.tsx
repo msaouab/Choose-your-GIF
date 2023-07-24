@@ -38,8 +38,8 @@ const ImgGif = ({ source, alt }: { source: string; alt?: string }) => {
 				<Stack>
 					<Skeleton
 						variant="rectangular"
-						// width={210}
-						// height={118}
+						width={210}
+						height={118}
 						animation="wave"
 					/>
 				</Stack>
