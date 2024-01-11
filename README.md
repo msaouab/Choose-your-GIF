@@ -1,4 +1,4 @@
-# Take-Home-Assignment
+# Choose Your GIF
 
 ## How to Run
 
